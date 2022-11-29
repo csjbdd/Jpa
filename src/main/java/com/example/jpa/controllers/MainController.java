@@ -8,9 +8,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 public class MainController {
 
-    @GetMapping("/main/{name}")
-    public String test(Model model, @PathVariable("name") String name) {
-        model.addAttribute("name", name);
+    @GetMapping("/")
+    public String login() {
+        return "login";
+    }
+
+    @GetMapping("/register")
+    public String register() {
+        return "register";
+    }
+
+    @GetMapping("/main/")
+    public String main() {
+
         return "main";
     }
 }
