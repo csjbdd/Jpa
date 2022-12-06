@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <!-- setting -->
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/> <!-- 카멜케이스 -->
+        <setting name="callSettersOnNulls" value="true"/> <!-- 쿼리결과가 null 일때 null 그대로 -->
+        <setting name="jdbcTypeForNull" value="NULL"/> <!-- 쿼리에 보내는 파라미터가 null일경우 오류발생X -->
+        <setting name="cacheEnabled" value="false"/> <!-- 캐시삭제 -->
+        <setting name="localCacheScope" value="STATEMENT"/> <!-- 로컬캐시삭제 -->
+    </settings>
+
+    <!-- Alias -->
+    <typeAliases>
+        <typeAlias alias="hashMap" type="java.util.HashMap" />
+        <typeAlias alias="map" type="java.util.Map" />
+    </typeAliases>
+
+</configuration>
