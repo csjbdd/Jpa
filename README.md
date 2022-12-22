@@ -5,4 +5,6 @@
 * 백단 : Spring Boot "2.7.6"   
 * 프론트단 : Alpine.js, jquery
 ## 사용 라이브러리  
-* jasypt : application.properties github에 그대로 노출 시 DB 해킹위험이 있으므로 jasypt 사용 JasyptConfig에 암호화 키가 노출되면 복호화가 가능하기 때문에 임시로 ""로 해놓음 (본인만 key를 알수 있음)
+* jasypt : application.properties github에 그대로 노출 시 DB 해킹위험이 있으므로 jasypt 사용 JasyptConfig에 암호화 키가 노출되면 복호화가 가능하기 때문에 임시로 ""로 해놓음 (본인만 key를 알수 있음)  
+* jsoup : 크롤링 정적페이지 할때 많이 씀 . 동적도 구현가능 . 헤더설정이나 쿠키 구현하면 동적도 가능 장점 : 속도가 빠름 단점 : 동적 페이지 구현이 어렵다. (사이트에 따라 난이도 다름)
+* Selenium : 크롤링 동적페이지 할때 많이 씀 . 정적도 구현가능. 장점 : 동적페이지 크롤링 가능 단점 : 속도가 jsoup에 비해 느리다. 
