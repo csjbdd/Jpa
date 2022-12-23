@@ -24,6 +24,7 @@ dependencies {
     implementation 'org.jsoup:jsoup:1.15.3'
     implementation 'org.seleniumhq.selenium:selenium-java:4.7.1'
     implementation 'org.projectlombok:lombok:1.18.22'
+    implementation 'org.json:json:20220924'
 
 
     runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
