@@ -244,12 +244,15 @@ public class JpaApplication {
         String author = null;
         String content = null;
 
-        Document doc = Jsoup.parse(html);
+        Document doc = Jsoup.parse(html.replaceAll("<!--.*-->","").replaceAll("<![-]{2}.*[-]*?>",""));
+
         Elements contentElements = doc.select(".board_type01_tb_readform > tbody  > tr > th");
         Elements inputElements = doc.select("input[type=hidden][name]");
+        Elements attachFileElements = doc.select("a[href^=javascript:fn_egov_downFile]");
+
         for(Element e : contentElements) {
             System.out.println("---------------------------------------------------------------------------");
-            switch (e.text()) {
+            switch (e.text().trim()) {
                 case "제목": {
                     title = e.nextElementSibling().text();
                     System.out.println("+ title : " + title);
@@ -290,27 +293,51 @@ public class JpaApplication {
                 }
 
             }
-            break;
+
         }
-        Elements fileInfoElements = inputElements.select("input[name=fileListCnt]");
+
         Pattern p = Pattern.compile("^((https[s]?):\\/)?\\/?([^:\\/\\s]+)(?=\\/)");
         Matcher m = p.matcher(driver.getCurrentUrl());
         String origin = m.find() ? m.group() : null;
 
-        if(fileInfoElements.size() > 0) {
-            String fileListCnt = fileInfoElements.first().val();
-            int fireListCntInt = Integer.parseInt(fileListCnt);
-            String atchFileId = inputElements.select("input[name=atchFileId]").first().val();
-            System.out.println("+ attachFilesCount : " + fireListCntInt);
-            String downloadURL = null;
-            for(int i = 0; i < fireListCntInt; i++) {
-                downloadURL = origin + "/dggb/board/boardFile/downFile.do?atchFileId="+atchFileId+"&fileSn="+i;
+        for(Element e : attachFileElements) {
+
+            String funcStr = e.attr("href");
+            String fileId = checkRegex("(?<=\\')(FILE_[0-9]{15})(?=\\')",funcStr);
+            String fileSn = checkRegex("(?<=\\')[0-5]{1}(?=\\')",funcStr);
+            if(!StringUtils.isBlank(fileId)  && !StringUtils.isBlank(fileSn)) {
+                String downloadURL = null;
+
+                downloadURL = origin + "/dggb/board/boardFile/downFile.do?atchFileId="+fileId+"&fileSn="+fileSn;
                 System.out.println(downloadURL);
+
+
+            }else {
+                System.out.println("#######################################################");
+                System.out.println("#######################################################");
+                System.out.println("#######################################################");
+                System.out.println("파일 확인 필요");
+                System.out.println("#######################################################");
+                System.out.println("#######################################################");
+                System.out.println("#######################################################");
             }
         }
+    }
 
-
-
+    private static String checkRegex(String regex, String str) {
+        String res = null;
+        Pattern p = null;
+        Matcher m = null;
+        try {
+            p = Pattern.compile(regex);
+            m = p.matcher(str);
+            if(m.find()) {
+                res = m.group();
+            }
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+        return res;
     }
 
 }
