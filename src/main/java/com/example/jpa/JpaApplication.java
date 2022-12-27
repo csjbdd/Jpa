@@ -40,22 +40,22 @@ public class JpaApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(JpaApplication.class, args);
-        try {
-            //공지사항 URL
-            String noticeURL = "https://gasan.sen.es.kr/53560/subMenu.do";
-            //가정통신문 URL
-            String familyCorrespondenceUrl = "https://gasan.sen.es.kr/18744/subMenu.do";
-            //급식 URL
-            String cafeteriaUrl = "https://gasan.sen.es.kr/57397/subMenu.do";
-            //공지사항 크롤링
-            noticeSelenium(noticeURL);
-            //가정통신문 크롤링
-            familyCorrespondenceSelenium(familyCorrespondenceUrl);
-            //급식 크롤링
-            cafeteriaSelenium(cafeteriaUrl);
-        } catch ( Exception e ) {
-            e.printStackTrace();
-        }
+//        try {
+//            //공지사항 URL
+//            String noticeURL = "https://gasan.sen.es.kr/53560/subMenu.do";
+//            //가정통신문 URL
+//            String familyCorrespondenceUrl = "https://gasan.sen.es.kr/18744/subMenu.do";
+//            //급식 URL
+//            String cafeteriaUrl = "https://gasan.sen.es.kr/57397/subMenu.do";
+//            //공지사항 크롤링
+//            noticeSelenium(noticeURL);
+//            //가정통신문 크롤링
+//            familyCorrespondenceSelenium(familyCorrespondenceUrl);
+//            //급식 크롤링
+//            cafeteriaSelenium(cafeteriaUrl);
+//        } catch ( Exception e ) {
+//            e.printStackTrace();
+//        }
     }
 
     private static void noticeSelenium(String URL) throws Exception {
